@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+
 import { projects } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/reveal";
@@ -22,48 +23,33 @@ export function Projects() {
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {projects.map((project, i) => (
             <Reveal key={project.title} delay={(i % 2) * 0.1}>
-              <article className="group glass flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:border-brand-1/40 hover:shadow-2xl hover:shadow-brand-1/5">
-                {/* Thumbnail / mockup */}
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <div
-                    className={cn(
-                      "absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-105",
-                      project.gradient,
-                    )}
+              <article className="group glass flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-2 hover:border-brand-1/40 hover:shadow-2xl hover:shadow-brand-1/10">
+                {/* Project Image */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    priority={project.featured}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-grid mask-radial opacity-30" />
 
-                  {/* Browser chrome */}
-                  <div className="absolute inset-x-0 top-0 flex items-center gap-1.5 px-4 py-3">
-                    <span className="size-2.5 rounded-full bg-white/50" />
-                    <span className="size-2.5 rounded-full bg-white/35" />
-                    <span className="size-2.5 rounded-full bg-white/20" />
-                    <span className="ml-3 hidden h-4 w-28 rounded bg-white/15 sm:block" />
-                  </div>
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-                  {/* Faux dashboard content */}
-                  <div className="absolute inset-x-4 bottom-4 space-y-2">
-                    <div className="h-2 w-1/3 rounded-full bg-white/50" />
-                    <div className="h-2 w-2/3 rounded-full bg-white/30" />
-                    <div className="grid grid-cols-3 gap-2 pt-1.5">
-                      <div className="h-9 rounded-lg bg-white/15" />
-                      <div className="h-9 rounded-lg bg-white/15" />
-                      <div className="h-9 rounded-lg bg-white/15" />
-                    </div>
-                  </div>
+                  {/* Year Badge */}
+                  <span className="absolute right-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
+                    {project.year}
+                  </span>
                 </div>
 
-                {/* Body */}
+                {/* Card Body */}
                 <div className="flex flex-1 flex-col gap-4 p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <h3 className="font-display text-xl font-semibold">
-                      {project.title}
-                    </h3>
-                    <span className="shrink-0 text-xs font-medium text-muted-foreground">
-                      {project.year}
-                    </span>
-                  </div>
-                  <p className="text-sm text-pretty text-muted-foreground">
+                  <h3 className="font-display text-xl font-semibold">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-sm leading-6 text-muted-foreground">
                     {project.description}
                   </p>
 
@@ -80,17 +66,15 @@ export function Projects() {
                   </div>
 
                   <div className="mt-auto flex items-center gap-4 pt-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                      >
-                        <GitHubIcon className="size-4" />
-                        Code
-                      </a>
-                    )}
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      <GitHubIcon className="size-4" />
+                      View Code
+                    </a>
                   </div>
                 </div>
               </article>

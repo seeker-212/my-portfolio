@@ -128,6 +128,7 @@ export const skillGroups: SkillGroup[] = [
 
 export type Project = {
   title: string;
+  image: string;
   description: string;
   tech: string[];
   github?: string;
@@ -141,6 +142,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "Genovate-AI",
+    image: "/projects/genovate.png",
     description:
       "**Genovate AI** is a modern AI-powered web application that streamlines content creation with tools for image generation, background removal, AI article writing, and more. It provides an intuitive interface that helps users create and edit content quickly and efficiently.",
     tech: ["React.js", "Javascript", "MongoDB", "Tailwind CSS", "WebSockets"],
@@ -151,6 +153,7 @@ export const projects: Project[] = [
   },
   {
     title: "Astro-silo",
+    image: "/projects/Astro.png",
     description:
       "**Astro-Silo** is a modern full-stack e-commerce clothing platform that delivers a seamless shopping experience with product browsing, secure authentication, shopping cart, order management, and an intuitive admin dashboard for managing products, inventory, and customer orders.",
     tech: ["React", "Javascript", "MongoDB"],
@@ -161,6 +164,7 @@ export const projects: Project[] = [
   },
   {
     title: "Chop-Now",
+    image: "/projects/chopnow.png",
     description:
       "**ChopNow** is a full-stack food delivery platform that delivers a seamless ordering experience with real-time order tracking, live delivery updates, secure online payments, restaurant management, and dedicated dashboards for customers, vendors, admins, and delivery riders.",
     tech: ["React", "JavaScript", "MongoDB", "Socket.io"],
@@ -171,6 +175,7 @@ export const projects: Project[] = [
   },
   {
     title: "Dev Pega",
+    image: "/projects/Dev.png",
     description:
       "**Dev Pega** is a modern full-stack blogging platform built with a Turborepo monorepo architecture. It features secure authentication, rich text editing, comments, likes, and a responsive interface, showcasing scalable application architecture and efficient code sharing across multiple apps and packages.",
     tech: ["Next.js", "Typescript", "Prisma", "Nest.js", "GraphQL"],

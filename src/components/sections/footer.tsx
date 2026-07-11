@@ -99,10 +99,6 @@ export function Footer() {
             {siteConfig.email}
             <ArrowUpRight className="size-4" />
           </a>
-          <p className="flex items-center gap-1.5">
-            Built with <Heart className="size-3.5 fill-brand-1 text-brand-1" /> Next.js &
-            Tailwind CSS
-          </p>
         </div>
       </div>
     </footer>
