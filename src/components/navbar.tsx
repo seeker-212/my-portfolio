@@ -31,7 +31,7 @@ export function Navbar() {
           if (entry.isIntersecting) setActive(entry.target.id);
         });
       },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
 
     sections.forEach((s) => observer.observe(s));
@@ -42,9 +42,9 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled
+        scrolled || open
           ? "glass-strong border-b border-foreground/5"
-          : "border-b border-transparent bg-transparent"
+          : "border-b border-transparent bg-transparent",
       )}
     >
       <nav className="container-page flex h-16 items-center justify-between gap-4">
@@ -68,7 +68,9 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "relative rounded-full px-3.5 py-2 text-sm transition-colors",
-                  isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  isActive
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {isActive && (
@@ -90,7 +92,7 @@ export function Navbar() {
             href="#contact"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "hidden h-10 px-5 md:inline-flex"
+              "hidden h-10 px-5 md:inline-flex",
             )}
           >
             Contact
@@ -132,7 +134,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "mt-2 h-11 w-full"
+                  "mt-2 h-11 w-full",
                 )}
               >
                 Get in touch
