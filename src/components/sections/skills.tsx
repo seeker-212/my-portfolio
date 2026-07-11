@@ -24,7 +24,7 @@ export function Skills() {
               delay={index * 0.08}
               x={index % 2 === 0 ? -20 : 20}
             >
-              <div className=" h-full rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-1/30">
+              <div className="glass h-full rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-1/30">
                 <h3 className="mb-6 font-display text-xl font-semibold">
                   {group.title}
                 </h3>
