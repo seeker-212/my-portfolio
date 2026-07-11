@@ -101,7 +101,6 @@ export const skillGroups: SkillGroup[] = [
       { name: "Next.js", icon: Triangle, level: 94 },
       { name: "Tailwind CSS", icon: Wind, level: 92 },
       { name: "Framer Motion", icon: Sparkles, level: 88 },
-      { name: "Three.js", icon: Box, level: 50 },
     ],
   },
   {
