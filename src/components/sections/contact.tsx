@@ -12,8 +12,6 @@ import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/brand-icons";
 
-const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT;
-
 const socials = [
   { label: "GitHub", href: siteConfig.socials.github, Icon: GitHubIcon },
   { label: "LinkedIn", href: siteConfig.socials.linkedin, Icon: LinkedInIcon },
@@ -28,7 +26,9 @@ export function Contact() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email);
+
     if (!values.name.trim() || !emailOk || !values.message.trim()) {
       setStatus("error");
       return;
@@ -37,22 +37,38 @@ export function Contact() {
     setStatus("submitting");
 
     try {
-      if (ENDPOINT) {
-        const res = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
+      const formData = {
+        access_key: process.env.WEB3_ACCESS_KEY,
+        subject: `New Portfolio Message from ${values.name}`,
+        from_name: values.name,
+        name: values.name,
+        email: values.email,
+        message: values.message,
+      };
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("success");
+        setValues({
+          name: "",
+          email: "",
+          message: "",
         });
-        if (!res.ok) throw new Error("Request failed");
       } else {
-        // No backend wired up — simulate a successful submission.
-        // Point NEXT_PUBLIC_CONTACT_FORM_ENDPOINT at Formspree / Resend /
-        // your API to make this send for real.
-        await new Promise((r) => setTimeout(r, 1100));
+        throw new Error(data.message);
       }
-      setStatus("success");
-      setValues({ name: "", email: "", message: "" });
-    } catch {
+    } catch (err) {
+      console.error(err);
       setStatus("error");
     }
   }
@@ -72,7 +88,9 @@ export function Contact() {
               highlight="build"
               description="Have a project in mind, or just want to say hello? My inbox is always open."
             />
-            <p className="text-pretty text-muted-foreground">{contactInfo.note}</p>
+            <p className="text-pretty text-muted-foreground">
+              {contactInfo.note}
+            </p>
 
             <div className="mt-2 flex flex-col gap-3">
               <a
@@ -114,6 +132,12 @@ export function Contact() {
               noValidate
               className="glass flex flex-col gap-4 rounded-3xl p-6 sm:p-8"
             >
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: "none" }}
+              />
               <div className="flex flex-col gap-1.5">
                 <label htmlFor="name" className="text-sm font-medium">
                   Name
@@ -123,7 +147,9 @@ export function Contact() {
                   name="name"
                   placeholder="Ada Lovelace"
                   value={values.name}
-                  onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
+                  onChange={(e) =>
+                    setValues((v) => ({ ...v, name: e.target.value }))
+                  }
                   className={field}
                   required
                 />
@@ -139,7 +165,9 @@ export function Contact() {
                   type="email"
                   placeholder="you@example.com"
                   value={values.email}
-                  onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
+                  onChange={(e) =>
+                    setValues((v) => ({ ...v, email: e.target.value }))
+                  }
                   className={field}
                   required
                 />
@@ -155,7 +183,9 @@ export function Contact() {
                   placeholder="Tell me about your project…"
                   rows={5}
                   value={values.message}
-                  onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
+                  onChange={(e) =>
+                    setValues((v) => ({ ...v, message: e.target.value }))
+                  }
                   className="min-h-32 resize-none bg-background/60 dark:bg-input/30 border-border focus-visible:border-ring"
                   required
                 />
@@ -165,7 +195,7 @@ export function Contact() {
                 type="submit"
                 disabled={status === "submitting"}
                 className={cn(
-                  "mt-1 h-12 gap-2 bg-brand-gradient text-white shadow-lg shadow-brand-1/25 hover:opacity-90"
+                  "mt-1 h-12 gap-2 bg-brand-gradient text-white shadow-lg shadow-brand-1/25 hover:opacity-90",
                 )}
               >
                 {status === "submitting" ? (
@@ -186,7 +216,7 @@ export function Contact() {
               )}
               {status === "error" && (
                 <p className="text-sm font-medium text-destructive">
-                  Please fill in your name, a valid email, and a message.
+                  Something went wrong. Please check your details and try again.
                 </p>
               )}
             </form>
