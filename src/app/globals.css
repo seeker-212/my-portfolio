@@ -161,19 +161,22 @@
 
   /* Glassmorphism */
   .glass {
-    background: color-mix(in oklab, var(--card) 92%, transparent);
+    background: color-mix(in oklab, var(--background) 80%, transparent);
     border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
-    box-shadow:
-      0 8px 30px rgb(0 0 0 / 0.08),
-      inset 0 1px rgb(255 255 255 / 0.05);
+  }
+
+  @media (min-width: 1024px) {
+    .glass {
+      backdrop-filter: blur(14px) saturate(150%);
+      -webkit-backdrop-filter: blur(14px) saturate(150%);
+    }
   }
 
   .glass-strong {
-    background: color-mix(in oklab, var(--card) 96%, transparent);
+    background-color: color-mix(in oklab, var(--background) 82%, transparent);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
     border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
-    box-shadow:
-      0 10px 35px rgb(0 0 0 / 0.12),
-      inset 0 1px rgb(255 255 255 / 0.05);
   }
 
   /* Subtle grid background */
