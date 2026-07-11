@@ -38,12 +38,13 @@ export function Contact() {
 
     try {
       const formData = {
-        access_key: process.env.WEB3_ACCESS_KEY,
+        access_key: process.env.NEXT_PUBLIC_WEB3_ACCESS_KEY,
         subject: `New Portfolio Message from ${values.name}`,
         from_name: values.name,
         name: values.name,
         email: values.email,
         message: values.message,
+        botcheck: "",
       };
 
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -57,7 +58,10 @@ export function Contact() {
 
       const data = await res.json();
 
-      if (data.success) {
+      console.log("Status:", res.status);
+      console.log("Response:", data);
+
+      if (res.ok && data.success) {
         setStatus("success");
         setValues({
           name: "",
@@ -65,10 +69,10 @@ export function Contact() {
           message: "",
         });
       } else {
-        throw new Error(data.message);
+        throw new Error(data.message || "Failed to send message.");
       }
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error("Web3Forms Error:", error);
       setStatus("error");
     }
   }
