@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { skillGroups } from "@/lib/data";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
@@ -13,53 +12,31 @@ export function Skills() {
       <div className="container-page">
         <SectionHeading
           eyebrow="Skills"
-          title="Tools I work with"
-          highlight="work"
-          description="A practical toolkit honed across startups and product teams — from typed frontends to cloud-native backends."
+          title="Technologies I use"
+          highlight="Technologies"
+          description="The tools and technologies I use to design, build, and deploy modern full-stack applications."
         />
 
-        <div className="mt-10 grid gap-5 md:mt-12 md:grid-cols-2 md:gap-6">
-          {skillGroups.map((group, gi) => (
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {skillGroups.map((group, index) => (
             <Reveal
               key={group.title}
-              delay={gi * 0.08}
-              x={gi % 2 === 0 ? -20 : 20}
+              delay={index * 0.08}
+              x={index % 2 === 0 ? -20 : 20}
             >
-              <div className="glass h-full rounded-3xl p-4 sm:p-6 lg:p-7">
-                <h3 className="font-display text-lg font-semibold">
+              <div className="glass h-full rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-1/30">
+                <h3 className="mb-6 font-display text-xl font-semibold">
                   {group.title}
                 </h3>
 
-                <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="flex flex-wrap gap-3">
                   {group.skills.map((skill) => (
-                    <div key={skill.name} className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-muted text-brand-1">
-                          <skill.icon className="size-[18px]" />
-                        </span>
-
-                        <span className="min-w-0 flex-1 text-sm font-medium break-words">
-                          {skill.name}
-                        </span>
-
-                        <span className="shrink-0 text-xs text-muted-foreground">
-                          {skill.level}%
-                        </span>
-                      </div>
-
-                      <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                        <motion.div
-                          className="h-full rounded-full bg-brand-gradient"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true, margin: "-60px" }}
-                          transition={{
-                            duration: 0.9,
-                            ease: "easeOut",
-                            delay: 0.1,
-                          }}
-                        />
-                      </div>
+                    <div
+                      key={skill.name}
+                      className="flex items-center gap-2 rounded-xl border border-border bg-muted/40 px-4 py-3 transition-all duration-300 hover:border-brand-1/40 hover:bg-muted"
+                    >
+                      <skill.icon className="size-5 text-brand-1" />
+                      <span className="text-sm font-medium">{skill.name}</span>
                     </div>
                   ))}
                 </div>
