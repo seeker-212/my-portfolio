@@ -22,7 +22,7 @@ export function Projects() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {projects.map((project, i) => (
-            <div key={project.title}>
+            <Reveal key={project.title} delay={(i % 2) * 0.1}>
               <article className="group glass flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-2 hover:border-brand-1/40 hover:shadow-2xl hover:shadow-brand-1/10">
                 {/* Project Image */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-muted">
@@ -78,7 +78,7 @@ export function Projects() {
                   </div>
                 </div>
               </article>
-            </div>
+            </Reveal>
           ))}
         </div>
 
