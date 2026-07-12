@@ -25,7 +25,7 @@ export function Projects() {
             <Reveal key={project.title} delay={(i % 2) * 0.1}>
               <article className="group glass flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:-translate-y-2 hover:border-brand-1/40 hover:shadow-2xl hover:shadow-brand-1/10">
                 {/* Project Image */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+                <div className="relative aspect-16/10 overflow-hidden bg-muted">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -35,7 +35,7 @@ export function Projects() {
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
 
                   {/* Year Badge */}
                   <span className="absolute right-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur-md">
