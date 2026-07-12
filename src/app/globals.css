@@ -102,6 +102,11 @@
     outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
   }
 
+  .skill-card {
+    contain: paint;
+    isolation: isolate;
+  }
+
   html {
     width: 100%;
     overflow-x: hidden;
