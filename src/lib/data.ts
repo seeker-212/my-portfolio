@@ -31,7 +31,7 @@ import {
  */
 export const siteConfig = {
   name: "Henry Ugwu",
-  role: "Full-Stack Developer & UI Specialist",
+  role: "Full-Stack Developer & cybersecurity enthusiast",
   // Replace with your real domain (used for canonical URLs, OG tags, JSON-LD)
   url: "https://henryugwu.dev",
   description:
@@ -201,7 +201,7 @@ export const experience: TimelineItem[] = [
   },
   {
     type: "experience",
-    title: "Software Engineering Intern",
+    title: "FreeLancer",
     organization: "Fiver",
     period: "2023 — present",
   },
